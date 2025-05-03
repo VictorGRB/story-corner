@@ -1,0 +1,428 @@
+/* Body and General Layout */
+body {
+  font-family: Arial, sans-serif;
+  margin: 2rem;
+  background: #fefefe;
+  color: #333;
+  background: url('wall.avif') repeat; /* Replace with a house pattern image URL */
+  background-size: cover;
+    
+}
+
+h1 {
+  text-align: center;
+  color: #4a148c;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+form input,
+form select,
+form button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+form button {
+  background-color: #4a148c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #6a1b9a;
+}
+
+/* Book List Styling */
+#book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+  /* Allow scaling to show */
+}
+
+/* Book Card Styles */
+.book-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 200px;
+  text-align: center;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  /* Make sure positioning context is correct */
+  z-index: 1;
+  /* Ensure it appears above its sibling elements */
+  justify-content: space-between;
+
+}
+
+.book-card:hover {
+  transform: scale(1.1) translateZ(0) !important;
+  z-index: 100 !important;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2) !important;
+}
+
+/* Additional styling for content inside book cards */
+.book-card img {
+  width: 120px;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.book-card h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.2em;
+  text-align: center;
+  margin: 0.5rem 0;
+  text-wrap: balance;
+}
+
+.book-card p {
+  margin: 0.25rem 0;
+}
+
+.book-card label {
+  font-weight: bold;
+  margin: 0;
+}
+
+.book-card select {
+  width: 100%;
+  padding: 0.3rem;
+  height: 30px;
+  margin-top: 0.5rem;
+  /* Add top margin for better spacing */
+  margin-bottom: 0.75rem;
+}
+
+.book-card button {
+  background-color: #4a148c;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  height: 30px;
+}
+
+.book-card button:hover {
+  background-color: #6a1b9a;
+}
+
+.book-card .delete-btn {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  height: 30px;
+  margin-top: auto;
+}
+
+.book-card .delete-btn:hover {
+  background-color: #b71c1c;
+}
+
+#loading-spinner {
+  display: none;
+  text-align: center;
+  font-size: 20px;
+  color: #000;
+  margin-top: 20px;
+}
+
+/* Button hover effects */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in animation when a book card is added */
+.book-card.animate-in {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Fade-out animation when deleting a book */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.book-card.fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+/* Style for the ghost element while dragging */
+.sortable-ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+  border: 2px dashed #4a148c;
+}
+
+/* For smoother transitions of cards when rearranged */
+#book-list .book-card {
+  transition: transform 0.3s ease, margin 0.3s ease;
+}
+
+#book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Modal Styles */
+/* Modal Styles */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent black background */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  /* Ensure the modal appears above other content */
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 10000;
+  /* Make sure the modal content is also above other elements */
+}
+
+.confirm-btn {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Update these rules in your CSS */
+
+#suggestions-list {
+  display: none;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 0.5rem;
+  padding: 8px; /* Increased padding for transform space */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: visible;
+  position: relative; /* Creates a new stacking context */
+  
+}
+
+.suggestion-card {
+  display: block;
+  padding: 10px 12px;
+  margin: 8px 0; /* Increased margin for transform space */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: relative;
+  transform: scale(1);
+  z-index: 1;
+}
+
+/* Remove the :hover rule from CSS since we're handling it in JS */
+
+.suggestion-card:hover {
+  background-color: #e8f0fe;
+  transform: scale(1.05);
+  z-index: 100; /* Higher than default */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Visual feedback */
+  outline: 2px solid rgb(79, 7, 247) !important;
+  
+}
+
+.suggestion-title {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.suggestion-author {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#suggestions-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+#title {
+  width: 100%;
+  height: 40px;
+  /* padding: 10px 35px 10px 10px; */
+  font-size: 1rem;
+  box-sizing: border-box;
+  position: relative;       /* So that the absolute button can be positioned inside */
+  padding-right: 30px;  
+}
+
+#load-more {
+  height: 40px;
+  margin-top: 8px;
+  padding: 0 16px;
+  font-size: 1rem;
+  align-self: flex-start;
+  display: none; /* Hide the load more button initially */
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  min-height: 40px; 
+  display: inline-block;
+}
+
+.input-wrapper button {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  border: none;
+  background-color: #780de4;
+  cursor: pointer;
+}
+.clear-btn:hover {
+  color: #e6e3e9; /* Change color on hover */
+  transform: scale(1.2);
+}
+
+.suggestions-list:empty {
+  display: none;
+}
+
+/* Disable hover effects during drag */
+body.dragging-active .book-card:hover,
+.book-card.no-hover-effect:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    transition: none !important;
+}
+
+/* Reset after drag */
+body:not(.dragging-active) .book-card.no-hover-effect {
+    transition: transform 0.3s ease !important;
+}
+
+#logout-btn {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+#logout-btn:hover {
+  background: #ff6b81;
+}
+

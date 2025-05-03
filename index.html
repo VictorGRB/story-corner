@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Story Corner</title>
+    <!-- <button id="logout-btn" style="display: none;">Log out</button> -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="books.png" type="image/png" />
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Auth Container -->
+    <!-- <div id="auth-container">
+        <h2 id="auth-title">Login</h2>
+        <form id="auth-form">
+            <input type="email" id="auth-email" placeholder="Email" required />
+            <input type="password" id="auth-password" placeholder="Password" required />
+            <button type="submit" id="auth-submit">Login</button>
+        </form>
+        <p id="auth-toggle-text">
+            Don't have an account? <a href="#" id="toggle-auth-mode">Sign up</a>
+        </p>
+        <p id="auth-error" style="color: red;"></p>
+        
+    </div> -->
+    <!-- Logout Button (now outside auth container)
+    <button id="logout-btn" style="display: none; position: fixed; top: 20px; right: 20px;">Log out</button>
+    -->
+        <h1>📚 Story Corner</h1>
+
+        <form id="book-form">
+            <div class="input-wrapper">
+                <input id="title" type="text" placeholder="Book Title" required />
+                <button type="button" id="clear-input" class="clear-btn" style="display: none;">&#10005;</button>
+                <div id="loading-spinner" style="display: none;">Loading...</div>
+            </div>
+            <div id="suggestions-spinner" class="spinner" style="display: none;">
+                <div class="loader"></div>
+            </div>
+            <ul id="suggestions-list" class="suggestions"></ul>
+            <button id="load-more" style="display: none;">Load More</button>
+        </form>
+
+        <div id="book-list"></div>
+
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <h3>Are you sure you want to delete this book?</h3>
+                <button id="confirmDelete" class="confirm-btn">Yes, delete</button>
+                <button id="cancelDelete" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+
+</body>
+
+</html>
